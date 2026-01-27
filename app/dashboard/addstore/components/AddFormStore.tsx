@@ -147,9 +147,10 @@ const AddFormStore = () => {
 
   const handleFinish = async () => {
     setLoading(true);
-    toast.loading("Media Uploading");
+    const toastId = toast.loading("Media Uploading");
     const { bannerUrl } = await mediaUpload();
     console.log(bannerUrl);
+    toast.dismiss(toastId);
     toast.success("Video Upload Done");
 
     const formData = new FormData();
