@@ -2401,7 +2401,6 @@ export namespace Prisma {
     latitude: number | null
     longitude: number | null
     bannerImageUrl: string | null
-    videoUrl: string | null
     priceInr: number | null
     shareMode: $Enums.ShareMode | null
     startTime: string | null
@@ -2428,7 +2427,6 @@ export namespace Prisma {
     latitude: number | null
     longitude: number | null
     bannerImageUrl: string | null
-    videoUrl: string | null
     priceInr: number | null
     shareMode: $Enums.ShareMode | null
     startTime: string | null
@@ -2455,7 +2453,6 @@ export namespace Prisma {
     latitude: number
     longitude: number
     bannerImageUrl: number
-    videoUrl: number
     priceInr: number
     shareMode: number
     startTime: number
@@ -2499,7 +2496,6 @@ export namespace Prisma {
     latitude?: true
     longitude?: true
     bannerImageUrl?: true
-    videoUrl?: true
     priceInr?: true
     shareMode?: true
     startTime?: true
@@ -2526,7 +2522,6 @@ export namespace Prisma {
     latitude?: true
     longitude?: true
     bannerImageUrl?: true
-    videoUrl?: true
     priceInr?: true
     shareMode?: true
     startTime?: true
@@ -2553,7 +2548,6 @@ export namespace Prisma {
     latitude?: true
     longitude?: true
     bannerImageUrl?: true
-    videoUrl?: true
     priceInr?: true
     shareMode?: true
     startTime?: true
@@ -2668,7 +2662,6 @@ export namespace Prisma {
     latitude: number | null
     longitude: number | null
     bannerImageUrl: string | null
-    videoUrl: string
     priceInr: number
     shareMode: $Enums.ShareMode
     startTime: string | null
@@ -2715,7 +2708,6 @@ export namespace Prisma {
     latitude?: boolean
     longitude?: boolean
     bannerImageUrl?: boolean
-    videoUrl?: boolean
     priceInr?: boolean
     shareMode?: boolean
     startTime?: boolean
@@ -2747,7 +2739,6 @@ export namespace Prisma {
     latitude?: boolean
     longitude?: boolean
     bannerImageUrl?: boolean
-    videoUrl?: boolean
     priceInr?: boolean
     shareMode?: boolean
     startTime?: boolean
@@ -2776,7 +2767,6 @@ export namespace Prisma {
     latitude?: boolean
     longitude?: boolean
     bannerImageUrl?: boolean
-    videoUrl?: boolean
     priceInr?: boolean
     shareMode?: boolean
     startTime?: boolean
@@ -2805,7 +2795,6 @@ export namespace Prisma {
     latitude?: boolean
     longitude?: boolean
     bannerImageUrl?: boolean
-    videoUrl?: boolean
     priceInr?: boolean
     shareMode?: boolean
     startTime?: boolean
@@ -2817,7 +2806,7 @@ export namespace Prisma {
     updatedAt?: boolean
   }
 
-  export type StoreOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "ownerId" | "title" | "desc" | "peopleDesc" | "storeSize" | "businessType" | "country" | "state" | "city" | "pin" | "fullAddress" | "latitude" | "longitude" | "bannerImageUrl" | "videoUrl" | "priceInr" | "shareMode" | "startTime" | "endTime" | "days" | "sqft" | "dayOrNight" | "createdAt" | "updatedAt", ExtArgs["result"]["store"]>
+  export type StoreOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "ownerId" | "title" | "desc" | "peopleDesc" | "storeSize" | "businessType" | "country" | "state" | "city" | "pin" | "fullAddress" | "latitude" | "longitude" | "bannerImageUrl" | "priceInr" | "shareMode" | "startTime" | "endTime" | "days" | "sqft" | "dayOrNight" | "createdAt" | "updatedAt", ExtArgs["result"]["store"]>
   export type StoreInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     owner?: boolean | UserDefaultArgs<ExtArgs>
     images?: boolean | Store$imagesArgs<ExtArgs>
@@ -2854,7 +2843,6 @@ export namespace Prisma {
       latitude: number | null
       longitude: number | null
       bannerImageUrl: string | null
-      videoUrl: string
       priceInr: number
       shareMode: $Enums.ShareMode
       startTime: string | null
@@ -3305,7 +3293,6 @@ export namespace Prisma {
     readonly latitude: FieldRef<"Store", 'Float'>
     readonly longitude: FieldRef<"Store", 'Float'>
     readonly bannerImageUrl: FieldRef<"Store", 'String'>
-    readonly videoUrl: FieldRef<"Store", 'String'>
     readonly priceInr: FieldRef<"Store", 'Int'>
     readonly shareMode: FieldRef<"Store", 'ShareMode'>
     readonly startTime: FieldRef<"Store", 'String'>
@@ -5965,7 +5952,6 @@ export namespace Prisma {
     latitude: 'latitude',
     longitude: 'longitude',
     bannerImageUrl: 'bannerImageUrl',
-    videoUrl: 'videoUrl',
     priceInr: 'priceInr',
     shareMode: 'shareMode',
     startTime: 'startTime',
@@ -6197,7 +6183,6 @@ export namespace Prisma {
     latitude?: FloatNullableFilter<"Store"> | number | null
     longitude?: FloatNullableFilter<"Store"> | number | null
     bannerImageUrl?: StringNullableFilter<"Store"> | string | null
-    videoUrl?: StringFilter<"Store"> | string
     priceInr?: IntFilter<"Store"> | number
     shareMode?: EnumShareModeFilter<"Store"> | $Enums.ShareMode
     startTime?: StringNullableFilter<"Store"> | string | null
@@ -6228,7 +6213,6 @@ export namespace Prisma {
     latitude?: SortOrderInput | SortOrder
     longitude?: SortOrderInput | SortOrder
     bannerImageUrl?: SortOrderInput | SortOrder
-    videoUrl?: SortOrder
     priceInr?: SortOrder
     shareMode?: SortOrder
     startTime?: SortOrderInput | SortOrder
@@ -6262,7 +6246,6 @@ export namespace Prisma {
     latitude?: FloatNullableFilter<"Store"> | number | null
     longitude?: FloatNullableFilter<"Store"> | number | null
     bannerImageUrl?: StringNullableFilter<"Store"> | string | null
-    videoUrl?: StringFilter<"Store"> | string
     priceInr?: IntFilter<"Store"> | number
     shareMode?: EnumShareModeFilter<"Store"> | $Enums.ShareMode
     startTime?: StringNullableFilter<"Store"> | string | null
@@ -6293,7 +6276,6 @@ export namespace Prisma {
     latitude?: SortOrderInput | SortOrder
     longitude?: SortOrderInput | SortOrder
     bannerImageUrl?: SortOrderInput | SortOrder
-    videoUrl?: SortOrder
     priceInr?: SortOrder
     shareMode?: SortOrder
     startTime?: SortOrderInput | SortOrder
@@ -6329,7 +6311,6 @@ export namespace Prisma {
     latitude?: FloatNullableWithAggregatesFilter<"Store"> | number | null
     longitude?: FloatNullableWithAggregatesFilter<"Store"> | number | null
     bannerImageUrl?: StringNullableWithAggregatesFilter<"Store"> | string | null
-    videoUrl?: StringWithAggregatesFilter<"Store"> | string
     priceInr?: IntWithAggregatesFilter<"Store"> | number
     shareMode?: EnumShareModeWithAggregatesFilter<"Store"> | $Enums.ShareMode
     startTime?: StringNullableWithAggregatesFilter<"Store"> | string | null
@@ -6545,7 +6526,6 @@ export namespace Prisma {
     latitude?: number | null
     longitude?: number | null
     bannerImageUrl?: string | null
-    videoUrl: string
     priceInr: number
     shareMode: $Enums.ShareMode
     startTime?: string | null
@@ -6576,7 +6556,6 @@ export namespace Prisma {
     latitude?: number | null
     longitude?: number | null
     bannerImageUrl?: string | null
-    videoUrl: string
     priceInr: number
     shareMode: $Enums.ShareMode
     startTime?: string | null
@@ -6605,7 +6584,6 @@ export namespace Prisma {
     latitude?: NullableFloatFieldUpdateOperationsInput | number | null
     longitude?: NullableFloatFieldUpdateOperationsInput | number | null
     bannerImageUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    videoUrl?: StringFieldUpdateOperationsInput | string
     priceInr?: IntFieldUpdateOperationsInput | number
     shareMode?: EnumShareModeFieldUpdateOperationsInput | $Enums.ShareMode
     startTime?: NullableStringFieldUpdateOperationsInput | string | null
@@ -6636,7 +6614,6 @@ export namespace Prisma {
     latitude?: NullableFloatFieldUpdateOperationsInput | number | null
     longitude?: NullableFloatFieldUpdateOperationsInput | number | null
     bannerImageUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    videoUrl?: StringFieldUpdateOperationsInput | string
     priceInr?: IntFieldUpdateOperationsInput | number
     shareMode?: EnumShareModeFieldUpdateOperationsInput | $Enums.ShareMode
     startTime?: NullableStringFieldUpdateOperationsInput | string | null
@@ -6666,7 +6643,6 @@ export namespace Prisma {
     latitude?: number | null
     longitude?: number | null
     bannerImageUrl?: string | null
-    videoUrl: string
     priceInr: number
     shareMode: $Enums.ShareMode
     startTime?: string | null
@@ -6693,7 +6669,6 @@ export namespace Prisma {
     latitude?: NullableFloatFieldUpdateOperationsInput | number | null
     longitude?: NullableFloatFieldUpdateOperationsInput | number | null
     bannerImageUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    videoUrl?: StringFieldUpdateOperationsInput | string
     priceInr?: IntFieldUpdateOperationsInput | number
     shareMode?: EnumShareModeFieldUpdateOperationsInput | $Enums.ShareMode
     startTime?: NullableStringFieldUpdateOperationsInput | string | null
@@ -6721,7 +6696,6 @@ export namespace Prisma {
     latitude?: NullableFloatFieldUpdateOperationsInput | number | null
     longitude?: NullableFloatFieldUpdateOperationsInput | number | null
     bannerImageUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    videoUrl?: StringFieldUpdateOperationsInput | string
     priceInr?: IntFieldUpdateOperationsInput | number
     shareMode?: EnumShareModeFieldUpdateOperationsInput | $Enums.ShareMode
     startTime?: NullableStringFieldUpdateOperationsInput | string | null
@@ -7073,7 +7047,6 @@ export namespace Prisma {
     latitude?: SortOrder
     longitude?: SortOrder
     bannerImageUrl?: SortOrder
-    videoUrl?: SortOrder
     priceInr?: SortOrder
     shareMode?: SortOrder
     startTime?: SortOrder
@@ -7108,7 +7081,6 @@ export namespace Prisma {
     latitude?: SortOrder
     longitude?: SortOrder
     bannerImageUrl?: SortOrder
-    videoUrl?: SortOrder
     priceInr?: SortOrder
     shareMode?: SortOrder
     startTime?: SortOrder
@@ -7135,7 +7107,6 @@ export namespace Prisma {
     latitude?: SortOrder
     longitude?: SortOrder
     bannerImageUrl?: SortOrder
-    videoUrl?: SortOrder
     priceInr?: SortOrder
     shareMode?: SortOrder
     startTime?: SortOrder
@@ -7775,7 +7746,6 @@ export namespace Prisma {
     latitude?: number | null
     longitude?: number | null
     bannerImageUrl?: string | null
-    videoUrl: string
     priceInr: number
     shareMode: $Enums.ShareMode
     startTime?: string | null
@@ -7804,7 +7774,6 @@ export namespace Prisma {
     latitude?: number | null
     longitude?: number | null
     bannerImageUrl?: string | null
-    videoUrl: string
     priceInr: number
     shareMode: $Enums.ShareMode
     startTime?: string | null
@@ -7885,7 +7854,6 @@ export namespace Prisma {
     latitude?: FloatNullableFilter<"Store"> | number | null
     longitude?: FloatNullableFilter<"Store"> | number | null
     bannerImageUrl?: StringNullableFilter<"Store"> | string | null
-    videoUrl?: StringFilter<"Store"> | string
     priceInr?: IntFilter<"Store"> | number
     shareMode?: EnumShareModeFilter<"Store"> | $Enums.ShareMode
     startTime?: StringNullableFilter<"Store"> | string | null
@@ -8087,7 +8055,6 @@ export namespace Prisma {
     latitude?: number | null
     longitude?: number | null
     bannerImageUrl?: string | null
-    videoUrl: string
     priceInr: number
     shareMode: $Enums.ShareMode
     startTime?: string | null
@@ -8117,7 +8084,6 @@ export namespace Prisma {
     latitude?: number | null
     longitude?: number | null
     bannerImageUrl?: string | null
-    videoUrl: string
     priceInr: number
     shareMode: $Enums.ShareMode
     startTime?: string | null
@@ -8161,7 +8127,6 @@ export namespace Prisma {
     latitude?: NullableFloatFieldUpdateOperationsInput | number | null
     longitude?: NullableFloatFieldUpdateOperationsInput | number | null
     bannerImageUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    videoUrl?: StringFieldUpdateOperationsInput | string
     priceInr?: IntFieldUpdateOperationsInput | number
     shareMode?: EnumShareModeFieldUpdateOperationsInput | $Enums.ShareMode
     startTime?: NullableStringFieldUpdateOperationsInput | string | null
@@ -8191,7 +8156,6 @@ export namespace Prisma {
     latitude?: NullableFloatFieldUpdateOperationsInput | number | null
     longitude?: NullableFloatFieldUpdateOperationsInput | number | null
     bannerImageUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    videoUrl?: StringFieldUpdateOperationsInput | string
     priceInr?: IntFieldUpdateOperationsInput | number
     shareMode?: EnumShareModeFieldUpdateOperationsInput | $Enums.ShareMode
     startTime?: NullableStringFieldUpdateOperationsInput | string | null
@@ -8246,7 +8210,6 @@ export namespace Prisma {
     latitude?: number | null
     longitude?: number | null
     bannerImageUrl?: string | null
-    videoUrl: string
     priceInr: number
     shareMode: $Enums.ShareMode
     startTime?: string | null
@@ -8276,7 +8239,6 @@ export namespace Prisma {
     latitude?: number | null
     longitude?: number | null
     bannerImageUrl?: string | null
-    videoUrl: string
     priceInr: number
     shareMode: $Enums.ShareMode
     startTime?: string | null
@@ -8353,7 +8315,6 @@ export namespace Prisma {
     latitude?: NullableFloatFieldUpdateOperationsInput | number | null
     longitude?: NullableFloatFieldUpdateOperationsInput | number | null
     bannerImageUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    videoUrl?: StringFieldUpdateOperationsInput | string
     priceInr?: IntFieldUpdateOperationsInput | number
     shareMode?: EnumShareModeFieldUpdateOperationsInput | $Enums.ShareMode
     startTime?: NullableStringFieldUpdateOperationsInput | string | null
@@ -8383,7 +8344,6 @@ export namespace Prisma {
     latitude?: NullableFloatFieldUpdateOperationsInput | number | null
     longitude?: NullableFloatFieldUpdateOperationsInput | number | null
     bannerImageUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    videoUrl?: StringFieldUpdateOperationsInput | string
     priceInr?: IntFieldUpdateOperationsInput | number
     shareMode?: EnumShareModeFieldUpdateOperationsInput | $Enums.ShareMode
     startTime?: NullableStringFieldUpdateOperationsInput | string | null
@@ -8411,7 +8371,6 @@ export namespace Prisma {
     latitude?: number | null
     longitude?: number | null
     bannerImageUrl?: string | null
-    videoUrl: string
     priceInr: number
     shareMode: $Enums.ShareMode
     startTime?: string | null
@@ -8444,7 +8403,6 @@ export namespace Prisma {
     latitude?: NullableFloatFieldUpdateOperationsInput | number | null
     longitude?: NullableFloatFieldUpdateOperationsInput | number | null
     bannerImageUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    videoUrl?: StringFieldUpdateOperationsInput | string
     priceInr?: IntFieldUpdateOperationsInput | number
     shareMode?: EnumShareModeFieldUpdateOperationsInput | $Enums.ShareMode
     startTime?: NullableStringFieldUpdateOperationsInput | string | null
@@ -8473,7 +8431,6 @@ export namespace Prisma {
     latitude?: NullableFloatFieldUpdateOperationsInput | number | null
     longitude?: NullableFloatFieldUpdateOperationsInput | number | null
     bannerImageUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    videoUrl?: StringFieldUpdateOperationsInput | string
     priceInr?: IntFieldUpdateOperationsInput | number
     shareMode?: EnumShareModeFieldUpdateOperationsInput | $Enums.ShareMode
     startTime?: NullableStringFieldUpdateOperationsInput | string | null
@@ -8502,7 +8459,6 @@ export namespace Prisma {
     latitude?: NullableFloatFieldUpdateOperationsInput | number | null
     longitude?: NullableFloatFieldUpdateOperationsInput | number | null
     bannerImageUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    videoUrl?: StringFieldUpdateOperationsInput | string
     priceInr?: IntFieldUpdateOperationsInput | number
     shareMode?: EnumShareModeFieldUpdateOperationsInput | $Enums.ShareMode
     startTime?: NullableStringFieldUpdateOperationsInput | string | null

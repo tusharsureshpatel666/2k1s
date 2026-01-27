@@ -111,12 +111,12 @@ const AddFormStore = () => {
         mode === "Weekend" ||
         // Regular (no extra input)
         mode === "Regular")) ||
-    (sStep === 7 && videoFile !== null) ||
-    (sStep === 8 && Number(price) > 0) ||
-    (sStep === 9 && bussinessType !== "") ||
-    (sStep === 10 && desc !== "") ||
-    (sStep === 11 && peopleDesc !== "") ||
-    sStep > 12;
+    // (sStep === 7 && videoFile !== null) ||
+    (sStep === 7 && Number(price) > 0) ||
+    (sStep === 8 && bussinessType !== "") ||
+    (sStep === 9 && desc !== "") ||
+    (sStep === 10 && peopleDesc !== "") ||
+    sStep > 11;
 
   const handleNext = () => {
     if (!isStepValid) {
@@ -131,7 +131,7 @@ const AddFormStore = () => {
       const formData = new FormData();
 
       if (bannerImage) formData.append("bannerImage", bannerImage);
-      if (videoFile) formData.append("videoFile", videoFile);
+      // if (videoFile) formData.append("videoFile", videoFile);
 
       const res = await axios.post("/api/upload/images", formData, {
         headers: {
@@ -147,9 +147,10 @@ const AddFormStore = () => {
 
   const handleFinish = async () => {
     setLoading(true);
-
-    const { bannerUrl, videoUrl } = await mediaUpload();
-    console.log(bannerUrl, videoUrl);
+    toast.loading("Media Uploading");
+    const { bannerUrl } = await mediaUpload();
+    console.log(bannerUrl);
+    toast.success("Video Upload Done");
 
     const formData = new FormData();
 
@@ -252,16 +253,16 @@ const AddFormStore = () => {
       )}
       {sStep == 5 && <StepPartic />}
       {sStep == 6 && <StoreMethodtype />}
-      {sStep == 7 && (
+      {/* {sStep == 7 && (
         <TrueVideo
           setVideoFile={setVideoFile}
           videoUrl={videoUrl}
           setVideoUrl={setVideoUrl}
         />
-      )}
-      {sStep == 8 && <PriceInput price={price} setPrice={setPrice} />}
+      )} */}
+      {sStep == 7 && <PriceInput price={price} setPrice={setPrice} />}
 
-      {sStep == 9 && (
+      {sStep == 8 && (
         <div className="space-y-8 justify-center flex flex-col items-center">
           <Heading
             title="Business Details"
@@ -293,16 +294,16 @@ const AddFormStore = () => {
         </div>
       )}
 
-      {sStep == 10 && <StepDesc description={desc} setDescription={setDesc} />}
+      {sStep == 9 && <StepDesc description={desc} setDescription={setDesc} />}
 
-      {sStep == 11 && (
+      {sStep == 10 && (
         <PeopleDesc
           partnerDescription={peopleDesc}
           setPartnerDescription={setPeopleDesc}
         />
       )}
 
-      {sStep == 12 && (
+      {sStep == 11 && (
         <div className="text-center space-y-6 flex flex-col items-center justify-center">
           {/* Large Responsive Image */}
           <div className="w-32 h-32 sm:w-40 sm:h-40 flex items-center justify-center">

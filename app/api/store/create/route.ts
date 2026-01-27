@@ -34,7 +34,7 @@ export async function POST(req: Request) {
     const peopleDesc = formData.get("peopleDesc") as string;
     const storeSize = formData.get("storeSize") as string;
     const priceInr = Number(formData.get("priceInr"));
-    const videoFile = formData.get("videoFile") as string;
+    // const videoFile = formData.get("videoFile") as string;
     const bannerImage = formData.get("bannerImage") as string;
 
     /* ----------------------------- */
@@ -54,12 +54,12 @@ export async function POST(req: Request) {
       );
     }
 
-    if (!videoFile) {
-      return NextResponse.json(
-        { error: "Video is required", step: "VIDEO" },
-        { status: 400 },
-      );
-    }
+    // if (!videoFile) {
+    //   return NextResponse.json(
+    //     { error: "Video is required", step: "VIDEO" },
+    //     { status: 400 },
+    //   );
+    // }
 
     if (!desc) {
       return NextResponse.json(
@@ -170,7 +170,7 @@ export async function POST(req: Request) {
         businessType,
         latitude: lat,
         longitude: lng,
-        videoUrl: videoFile,
+        // videoUrl: videoFile,
         peopleDesc,
         storeSize,
         bannerImageUrl: bannerImage,

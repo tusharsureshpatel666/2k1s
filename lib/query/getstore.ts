@@ -13,7 +13,7 @@ export async function getStoreById(id: string) {
       title: true,
       desc: true,
       country: true,
-      videoUrl: true,
+
       state: true,
       city: true,
       pin: true,

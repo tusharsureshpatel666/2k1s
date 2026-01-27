@@ -62,7 +62,7 @@ model Store {
   bannerImageUrl String?
   images         StoreImage[]
 
-  videoUrl String
+  // videoUrl        String
 
   priceInr Int
 

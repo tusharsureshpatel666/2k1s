@@ -6,18 +6,15 @@ export async function POST(req: Request) {
     const formData = await req.formData();
 
     const bannerImage = formData.get("bannerImage") as File;
-    const videoFile = formData.get("videoFile") as File;
 
-    if (!bannerImage || !videoFile) {
+    if (!bannerImage) {
       return NextResponse.json({ error: "Missing files" }, { status: 400 });
     }
 
     const bannerUpload = await uploadToCloudinary(bannerImage, "image");
-    const videoUpload = await uploadToCloudinary(videoFile, "video");
 
     return NextResponse.json({
       bannerUrl: bannerUpload.secure_url,
-      videoUrl: videoUpload.secure_url,
     });
   } catch (err) {
     console.error(err);
