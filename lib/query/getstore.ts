@@ -13,6 +13,7 @@ export async function getStoreById(id: string) {
       title: true,
       desc: true,
       country: true,
+      peopleDesc: true,
 
       state: true,
       city: true,

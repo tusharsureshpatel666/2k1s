@@ -177,9 +177,9 @@ const AddFormStore = () => {
         dayOrNight: share.dayOrNight ?? null,
       }),
     );
-    if (videoFile) {
-      formData.append("videoFile", videoUrl);
-    }
+    // if (videoFile) {
+    //   formData.append("videoFile", videoUrl);
+    // }
 
     formData.append("desc", desc);
 

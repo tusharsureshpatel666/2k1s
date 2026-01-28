@@ -58,7 +58,7 @@ export function DesktopImageGrid({
         {/* SHOW ALL PHOTOS BUTTON */}
         <Button
           variant="secondary"
-          className="absolute bottom-4 text-white right-4 z-10 bg-red-500 hover:bg-red-600 text-sm font-medium"
+          className="absolute bottom-4 text-white right-4 z-10 bg-blue-500 hover:bg-blue-600 text-sm font-medium"
           onClick={() => {
             setIndex(0);
             setOpen(true);

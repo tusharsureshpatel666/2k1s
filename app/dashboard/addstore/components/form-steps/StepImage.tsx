@@ -35,7 +35,7 @@ const StepImage: React.FC<StepImageProps> = ({
         {/* Banner Image */}
         <div
           className={`${uploadBoxClasses} w-full md:w-2/3 h-64 md:h-130`}
-          style={{ minHeight: "320px" }}
+          style={{ minHeight: "350px" }}
           onClick={() => bannerInputRef.current?.click()}
         >
           {bannerImage ? (
@@ -62,11 +62,11 @@ const StepImage: React.FC<StepImageProps> = ({
         </div>
 
         {/* Other Images Grid */}
-        <div className="grid grid-cols-2 grid-rows-2 gap-4 w-full md:w-1/2">
+        <div className="grid grid-cols-2 grid-rows-2 gap-2 w-full md:w-1/2">
           {Array.from({ length: 4 }).map((_, index) => (
             <div
               key={index}
-              className={`${uploadBoxClasses} h-32 md:h-auto`}
+              className={`${uploadBoxClasses} h-32 md:h-64`}
               onClick={() => imageInputRefs.current[index]?.click()}
             >
               {otherImages[index] ? (

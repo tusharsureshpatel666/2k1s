@@ -26,3 +26,14 @@ create the search StorePage
 
         {/* RIGHT – PRICE CARD */}
       </div>
+
+
+      sharing time
+      day_day
+      tus
+
+      partner bussiness
+      gaming 
+
+      store sqft
+      200sq

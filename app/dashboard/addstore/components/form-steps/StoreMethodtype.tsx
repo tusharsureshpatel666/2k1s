@@ -75,8 +75,8 @@ const StoreMethodtype = () => {
                   className={`px-4 py-6 rounded-lg border  text-sm cursor-pointer font-medium transition
               ${
                 isSelected
-                  ? "border-red-500 bg-red-500 text-white"
-                  : "border-gray-300 hover:border-red-500"
+                  ? "border-blue-500 bg-blue-500 text-white"
+                  : "border-gray-300 hover:border-blue-500"
               }
             `}
                 >
@@ -149,8 +149,8 @@ const StoreMethodtype = () => {
               px-4 py-5 rounded-xl border font-semibold transition
               ${
                 isActive
-                  ? "border-red-500 bg-red-500 text-white"
-                  : "border-gray-300 hover:border-red-500"
+                  ? "border-blue-500 bg-blue-500 text-white"
+                  : "border-gray-300 hover:border-blue-500"
               }
             `}
                 >

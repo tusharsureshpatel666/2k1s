@@ -9,11 +9,13 @@ const DashNav = () => {
   return (
     <div
       className="
+        sticky top-0 z-50
         flex justify-between items-center
         px-4 py-4
         md:px-6 md:py-5
         lg:px-9 lg:py-6
-        h-auto
+        bg-white dark:bg-[#09090b]
+         
       "
     >
       <Link href="/" className="flex items-center gap-2">
@@ -23,15 +25,14 @@ const DashNav = () => {
         </h2>
       </Link>
 
-      <div className="flex gap-3">
+      <div className="flex gap-3 items-center">
         {/* Button 1 — Find Store Partner */}
         <Link href="/dashboard/findstore">
           <Button
             variant="outline"
-            className="rounded-md lg:rounded-full  cursor-pointer dark:text-white text-black flex items-center gap-2"
+            className="rounded-md lg:rounded-full cursor-pointer dark:text-white text-black flex items-center gap-2"
           >
             <Search className="w-5 h-5" />
-            {/* label hidden on small & medium screens */}
             <span className="hidden lg:inline">Find Store Partner</span>
           </Button>
         </Link>
@@ -40,10 +41,10 @@ const DashNav = () => {
         <Link href="/dashboard/addstore">
           <Button className="rounded-md lg:rounded-full cursor-pointer font-semibold flex items-center gap-2">
             <Store className="w-5 h-5" />
-            {/* label hidden on small & medium screens */}
             <span className="hidden lg:inline">Share Your Store</span>
           </Button>
         </Link>
+
         <Userbtn />
       </div>
     </div>
