@@ -14,6 +14,7 @@ import {
   Edit,
 } from "lucide-react";
 import { motion } from "framer-motion";
+import { error } from "console";
 
 /* =========================
    STORE TYPE
@@ -38,6 +39,7 @@ const AddCardList = () => {
       try {
         setLoading(true);
         const res = await axios.get<Store[]>("/api/store/yourstore");
+        console.log(res);
         setStores(res.data);
       } catch (error) {
         console.error("Failed to fetch stores:", error);
