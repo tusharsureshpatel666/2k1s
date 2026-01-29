@@ -1,11 +1,11 @@
 import React from "react";
 import Navbar from "../components/navbar";
-import Content from "../components/content";
+import Main from "./components/Main";
 
 const page = () => {
   return (
     <div>
-      <Content />
+      <Main />
     </div>
   );
 };
