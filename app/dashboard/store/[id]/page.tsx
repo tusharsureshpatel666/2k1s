@@ -52,7 +52,7 @@ export default async function StorePage({ params }: StorePageProps) {
   ].filter(Boolean);
 
   return (
-    <div className="max-w-7xl w-full space-y-6 px-4 sm:px-6 lg:px-0">
+    <div className="max-w-7xl w-full space-y-6  sm:px-6 lg:px-0">
       {/* ================= HEADER ================= */}
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <h1 className="text-2xl font-semibold break-words">{store?.title}</h1>
