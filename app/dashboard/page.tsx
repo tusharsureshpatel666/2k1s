@@ -9,7 +9,7 @@ export default function Dashboard() {
     <div className="w-full max-w-6xl">
       <SearchBox />
       <div className="h-screen">
-        <ListedStore />s
+        <ListedStore />
       </div>
     </div>
   );

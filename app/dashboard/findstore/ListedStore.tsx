@@ -1,6 +1,7 @@
 "use client";
 
 import { getAllStores } from "@/lib/query/allstore";
+import Image from "next/image";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 
@@ -27,7 +28,9 @@ const ListedStore = () => {
           >
             {/* Image */}
             <div className="relative aspect-square overflow-hidden rounded-2xl">
-              <img
+              <Image
+                width={400}
+                height={400}
                 src={item.bannerImageUrl || "/placeholder.jpg"}
                 alt={item.title}
                 className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
