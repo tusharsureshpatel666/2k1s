@@ -76,6 +76,9 @@ const Findstore = () => {
     }
     nextSStep();
   };
+
+  const [data, setData] = useState([]);
+  const router = useRouter();
   const handleFinish = async () => {
     setLoading(true);
     try {
@@ -115,16 +118,14 @@ const Findstore = () => {
 
       console.log("Nearest stores:", stores);
 
+      setData(stores);
+
       setLoading(false);
-      // 👉 setStores(stores) OR route to results page
     } catch (error) {
       console.error("handleFinish error:", error);
       setLoading(false);
     }
   };
-
-  const [data, setData] = useState();
-  const router = useRouter();
 
   return (
     <div>

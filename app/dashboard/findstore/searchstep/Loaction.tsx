@@ -65,7 +65,7 @@ const SearchLocation = () => {
       <Heading
         title="Which Location Are You Looking For?"
         description="Tell us the location where you want to open your store so we can help you find the right store partner."
-        className="text-center max-w-2xl"
+        className="text-center max-w-4xl"
       />
 
       {/* Card */}

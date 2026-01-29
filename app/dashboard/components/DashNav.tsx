@@ -1,6 +1,6 @@
 import Userbtn from "@/app/components/login/userbtn";
 import { Button } from "@/components/ui/button";
-import { Search, Store } from "lucide-react";
+import { Plus, Search, Store } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
@@ -27,7 +27,7 @@ const DashNav = () => {
 
       <div className="flex gap-3 items-center">
         {/* Button 1 — Find Store Partner */}
-        <Link href="/dashboard/findstore">
+        {/* <Link href="/dashboard/findstore">
           <Button
             variant="outline"
             className="rounded-md lg:rounded-full cursor-pointer dark:text-white text-black flex items-center gap-2"
@@ -35,13 +35,13 @@ const DashNav = () => {
             <Search className="w-5 h-5" />
             <span className="hidden lg:inline">Find Store Partner</span>
           </Button>
-        </Link>
+        </Link> */}
 
         {/* Button 2 — Share Your Store */}
         <Link href="/dashboard/addstore">
           <Button className="rounded-md lg:rounded-full cursor-pointer font-semibold flex items-center gap-2">
-            <Store className="w-5 h-5" />
-            <span className="hidden lg:inline">Share Your Store</span>
+            <Plus className="w-5 h-5" />
+            <span className="hidden lg:inline">List Your Store</span>
           </Button>
         </Link>
 
