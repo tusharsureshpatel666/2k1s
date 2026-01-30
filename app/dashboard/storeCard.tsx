@@ -34,11 +34,11 @@ export default function StoreCard({ store }: StoreCardProps) {
 
       {/* 📄 Text below image */}
       <div className="mt-2 space-y-1">
-        <h3 className="text-sm font-medium text-gray-900 line-clamp-1">
+        <h3 className="text-sm font-medium text-gray-900 dark:text-white line-clamp-1">
           {store.title}
         </h3>
 
-        <p className="text-sm text-gray-800">
+        <p className="text-sm text-gray-800 dark:text-gray-100">
           <span className="font-semibold">₹{store.priceInr}</span>
           <span className="text-gray-500"> / month</span>
         </p>
