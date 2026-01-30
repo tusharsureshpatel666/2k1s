@@ -13,7 +13,7 @@ const Heading: React.FC<HeadingProps> = ({ title, description, className }) => {
       <h1
         className="
           text-lg font-semibold leading-tight
-          sm:text-xl
+          sm:text-lg
           md:text-2xl
           lg:text-3xl
         "

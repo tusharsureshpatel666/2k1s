@@ -11,13 +11,13 @@ const StepIntro = () => {
     <div className="flex flex-col gap-8 animate-fadeIn">
       {/* Illustration */}
       <div className="flex justify-center w-full flex-col text-center items-center gap-5">
-        <div className="relative w-full max-w-md mx-auto aspect-square">
+        <div className="relative mx-auto w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg aspect-square">
           <Image
             src="/starter.svg"
-            alt="hello"
+            alt="Illustration"
             fill
-            className="object-contain"
             priority
+            className="object-contain"
           />
         </div>
 
