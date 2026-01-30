@@ -109,9 +109,10 @@ export default async function StorePage({ params }: StorePageProps) {
             {/* Bottom Footer */}
             <div
               className="
+              flex justify-center items-center
     fixed bottom-0 left-0 right-0 z-50
-    border-t bg-background px-4 py-3
-    flex gap-2
+    border-t bg-background px-2 py-3
+     gap-2
     sm:static sm:border-0 sm:p-0
   "
             >

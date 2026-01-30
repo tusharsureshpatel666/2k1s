@@ -3,6 +3,7 @@
 import { useRef, useState } from "react";
 import { LoadScript } from "@react-google-maps/api";
 import { Search, MapPin } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 const libraries: "places"[] = ["places"];
 
@@ -10,7 +11,7 @@ export default function SearchBox() {
   const [query, setQuery] = useState("");
   const [results, setResults] = useState<any[]>([]);
   const [open, setOpen] = useState(false);
-
+  const router = useRouter();
   const autocompleteService =
     useRef<google.maps.places.AutocompleteService | null>(null);
   const placesService = useRef<google.maps.places.PlacesService | null>(null);
@@ -55,17 +56,16 @@ export default function SearchBox() {
   const handleSelect = (placeId: string, description: string) => {
     setQuery(description);
     setOpen(false);
-    setResults([]);
 
     placesService.current?.getDetails({ placeId }, (place) => {
-      if (!place?.geometry) return;
+      if (!place?.geometry?.location) return;
 
-      console.log({
-        name: place.name,
-        address: place.formatted_address,
-        lat: place.geometry.location?.lat(),
-        lng: place.geometry.location?.lng(),
-      });
+      const lat = place.geometry.location.lat();
+      const lng = place.geometry.location.lng();
+
+      router.push(
+        `/dashboard/search?lat=${lat}&lng=${lng}&place=${encodeURIComponent(description)}`,
+      );
     });
   };
 
@@ -88,10 +88,6 @@ export default function SearchBox() {
               onFocus={() => setOpen(true)}
             />
           </div>
-
-          <button className="mr-2 rounded-full bg-blue-500 px-3 py-3 text-white hover:bg-blue-600">
-            <Search />
-          </button>
         </div>
 
         {/* Custom Dropdown */}

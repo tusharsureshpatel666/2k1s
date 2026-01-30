@@ -76,7 +76,7 @@ model Store {
 
   bannerImageUrl  String?
   images           StoreImage[]
-    conversations Conversation[]
+  conversations Conversation[]
 
 
 

@@ -4,18 +4,23 @@ import { getAllStores } from "@/lib/query/allstore";
 import Image from "next/image";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
+import LoveStore from "../store/[id]/components/LoveStore";
+import { auth } from "@/lib/auth";
+import { useSession } from "next-auth/react";
 
 const ListedStore = () => {
   const [data, setData] = useState([]);
-
+  const [userId, setUserId] = useState("");
   useEffect(() => {
     const getall = async () => {
       const store = await getAllStores();
       setData(store);
     };
+
     getall();
   }, []);
 
+  const { data: session } = useSession();
   return (
     <div className="mx-auto max-w-7xl lg:px-4 px-0 py-8">
       {/* Grid */}
@@ -33,15 +38,10 @@ const ListedStore = () => {
                 height={400}
                 src={item.bannerImageUrl || "/placeholder.jpg"}
                 alt={item.title}
-                className="h-full w-full object-cover transition-transform rounded-2xl duration-300 group-hover:scale-105"
+                className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
               />
 
-              {/* Rating */}
-              {/* {item.rating && (
-                <div className="absolute right-3 top-3 rounded-full bg-white px-2 py-1 text-xs font-semibold shadow">
-                  ⭐ {item.rating}
-                </div>
-              )} */}
+              {/* ❤️ Airbnb-style Love button */}
             </div>
 
             {/* Content */}
