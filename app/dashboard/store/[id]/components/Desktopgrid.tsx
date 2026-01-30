@@ -5,20 +5,31 @@ import Image from "next/image";
 import { ImageGalleryDialog } from "./imageGallerydialog";
 import { Button } from "@/components/ui/button";
 
-export function DesktopImageGrid({
-  banner,
-  images,
-}: {
+type DesktopImageGridProps = {
   banner: string;
   images: string[];
-}) {
+};
+
+export function DesktopImageGrid({ banner, images }: DesktopImageGridProps) {
   const allImages = [banner, ...images];
   const [open, setOpen] = useState(false);
   const [index, setIndex] = useState(0);
 
   return (
     <>
-      <div className="relative hidden md:grid grid-cols-4 grid-rows-2 gap-2 rounded-2xl overflow-hidden h-[580px]">
+      {/* IMAGE GRID */}
+      <div
+        className="
+          relative
+          grid
+          grid-cols-2 md:grid-cols-4
+          grid-rows-2
+          gap-2
+          rounded-2xl
+          overflow-hidden
+          h-[360px] sm:h-[320px] md:h-[480px] lg:h-[580px]
+        "
+      >
         {/* LEFT BIG IMAGE */}
         <div
           className="col-span-2 row-span-2 relative cursor-pointer"
@@ -32,15 +43,16 @@ export function DesktopImageGrid({
             alt="Main image"
             fill
             priority
+            sizes="(max-width: 768px) 100vw, 50vw"
             className="object-cover"
           />
         </div>
 
-        {/* RIGHT 4 IMAGES */}
+        {/* RIGHT 4 IMAGES (hidden on mobile) */}
         {images.slice(0, 4).map((img, i) => (
           <div
             key={i}
-            className="relative cursor-pointer"
+            className="relative cursor-pointer hidden md:block"
             onClick={() => {
               setIndex(i + 1);
               setOpen(true);
@@ -48,8 +60,9 @@ export function DesktopImageGrid({
           >
             <Image
               src={img}
-              alt="Gallery image"
+              alt={`Gallery image ${i + 1}`}
               fill
+              sizes="(max-width: 768px) 50vw, 25vw"
               className="object-cover"
             />
           </div>
@@ -58,7 +71,14 @@ export function DesktopImageGrid({
         {/* SHOW ALL PHOTOS BUTTON */}
         <Button
           variant="secondary"
-          className="absolute bottom-4 text-white right-4 z-10 bg-blue-500 hover:bg-blue-600 text-sm font-medium"
+          className="
+            absolute
+            bottom-3 right-3
+            z-10
+            bg-blue-500 text-white
+            hover:bg-blue-600
+            text-xs sm:text-sm
+          "
           onClick={() => {
             setIndex(0);
             setOpen(true);
@@ -68,6 +88,7 @@ export function DesktopImageGrid({
         </Button>
       </div>
 
+      {/* IMAGE MODAL */}
       <ImageGalleryDialog
         open={open}
         onOpenChange={setOpen}

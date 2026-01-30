@@ -1,76 +1,114 @@
 "use client";
 
-import { useState, useRef } from "react";
-import { LoadScript, Autocomplete } from "@react-google-maps/api";
-import { Search } from "lucide-react";
+import { useRef, useState } from "react";
+import { LoadScript } from "@react-google-maps/api";
+import { Search, MapPin } from "lucide-react";
 
-const libraries = ["places"];
+const libraries: "places"[] = ["places"];
 
 export default function SearchBox() {
-  const [place, setPlace] = useState("");
-  const autocompleteRef = useRef(null);
+  const [query, setQuery] = useState("");
+  const [results, setResults] = useState<any[]>([]);
+  const [open, setOpen] = useState(false);
 
-  const onLoad = (autocomplete) => {
-    autocompleteRef.current = autocomplete;
+  const autocompleteService =
+    useRef<google.maps.places.AutocompleteService | null>(null);
+  const placesService = useRef<google.maps.places.PlacesService | null>(null);
+  const boundsRef = useRef<google.maps.LatLngBounds | null>(null);
+
+  // ✅ Called only AFTER google script loads
+  const handleLoad = () => {
+    autocompleteService.current = new google.maps.places.AutocompleteService();
+
+    placesService.current = new google.maps.places.PlacesService(
+      document.createElement("div"),
+    );
+
+    boundsRef.current = new google.maps.LatLngBounds(
+      { lat: 28.4, lng: 76.84 },
+      { lat: 28.88, lng: 77.35 },
+    );
   };
 
-  const onPlaceChanged = () => {
-    const placeObj = autocompleteRef.current.getPlace();
-    if (!placeObj.geometry) return;
+  const handleChange = (value: string) => {
+    setQuery(value);
 
-    setPlace(placeObj.formatted_address);
+    if (!value || !autocompleteService.current) {
+      setResults([]);
+      return;
+    }
 
-    console.log({
-      name: placeObj.name,
-      lat: placeObj.geometry.location.lat(),
-      lng: placeObj.geometry.location.lng(),
+    autocompleteService.current.getPlacePredictions(
+      {
+        input: value,
+        componentRestrictions: { country: "in" },
+        bounds: boundsRef.current!,
+        strictBounds: true,
+      },
+      (predictions) => {
+        setResults(predictions || []);
+        setOpen(true);
+      },
+    );
+  };
+
+  const handleSelect = (placeId: string, description: string) => {
+    setQuery(description);
+    setOpen(false);
+    setResults([]);
+
+    placesService.current?.getDetails({ placeId }, (place) => {
+      if (!place?.geometry) return;
+
+      console.log({
+        name: place.name,
+        address: place.formatted_address,
+        lat: place.geometry.location?.lat(),
+        lng: place.geometry.location?.lng(),
+      });
     });
-  };
-
-  const NEW_DELHI_BOUNDS = {
-    north: 28.88,
-    south: 28.4,
-    east: 77.35,
-    west: 76.84,
   };
 
   return (
     <LoadScript
-      googleMapsApiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}
+      googleMapsApiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY!}
       libraries={libraries}
+      onLoad={handleLoad} // ✅ IMPORTANT
     >
-      <div className="mx-auto w-full max-w-5xl">
-        {/* Search Container */}
-        <div className="flex items-center rounded-full border border-gray-300 bg-white shadow-lg ">
-          {/* Input */}
-          <div className="flex flex-1 items-center gap-3 px-6 lg:py-4 md:py-3 sm:py-2 py-2">
+      <div className="relative mx-auto w-full max-w-5xl">
+        {/* Search Bar */}
+        <div className="flex items-center rounded-full border border-gray-300 bg-white dark:border-gray-600 dark:bg-black/50 shadow-lg">
+          <div className="flex flex-1 items-center gap-3 px-6 py-5">
             <Search className="h-5 w-5 text-gray-500" />
-            <Autocomplete
-              onLoad={onLoad}
-              onPlaceChanged={onPlaceChanged}
-              options={{
-                componentRestrictions: { country: "in" },
-                bounds: NEW_DELHI_BOUNDS,
-                strictBounds: true,
-                types: ["geocode"],
-              }}
-            >
-              <input
-                type="text"
-                placeholder="Search area in New Delhi"
-                className="w-full border-none bg-transparent text-sm outline-none placeholder:text-gray-500"
-              />
-            </Autocomplete>
+            <input
+              value={query}
+              onChange={(e) => handleChange(e.target.value)}
+              placeholder="Search area in New Delhi"
+              className="w-full bg-transparent text-sm outline-none placeholder:text-gray-500"
+              onFocus={() => setOpen(true)}
+            />
           </div>
 
-          {/* Search Button */}
-          <button
-            onClick={() => console.log("Searching for:", place)}
-            className="mr-2 rounded-full bg-blue-500 px-3 py-3 text-sm font-semibold text-white transition hover:bg-blue-600 cursor-pointer"
-          >
+          <button className="mr-2 rounded-full bg-blue-500 px-3 py-3 text-white hover:bg-blue-600">
             <Search />
           </button>
         </div>
+
+        {/* Custom Dropdown */}
+        {open && results.length > 0 && (
+          <div className="absolute z-50 mt-2 w-full rounded-xl border bg-white shadow-xl dark:border-gray-700 dark:bg-black">
+            {results.map((item) => (
+              <button
+                key={item.place_id}
+                onClick={() => handleSelect(item.place_id, item.description)}
+                className="flex w-full cursor-pointer items-center gap-3 px-4 py-5 text-left text-sm hover:bg-gray-100 dark:hover:bg-gray-800"
+              >
+                <MapPin className="h-4 w-4 text-gray-500" />
+                {item.description}
+              </button>
+            ))}
+          </div>
+        )}
       </div>
     </LoadScript>
   );

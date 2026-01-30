@@ -46,13 +46,13 @@ const ListedStore = () => {
 
             {/* Content */}
             <div className="mt-3 space-y-1">
-              <h3 className="md:text-sm text-xs  font-semibold text-gray-800">
+              <h3 className="md:text-sm text-xs dark:text-white font-semibold text-gray-800">
                 {item.title}
               </h3>
 
               <p className="text-xs text-gray-500">{item.location}</p>
 
-              <p className="md:text-sm text-xs font-medium text-gray-900">
+              <p className="md:text-sm text-xs font-medium dark:text-white text-gray-900">
                 ₹{item.priceInr}
                 <span className="text-gray-500"> / month</span>
               </p>
