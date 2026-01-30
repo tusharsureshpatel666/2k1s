@@ -17,7 +17,7 @@ const ShareStore = ({ paramsId }: { paramsId: string }) => {
   }/store/${paramsId}`;
 
   const whatsappShareUrl = `https://wa.me/?text=${encodeURIComponent(
-    `Check out this store 👇\n${storeUrl}`
+    `Check out this store 👇\n${storeUrl}`,
   )}`;
 
   return (
@@ -25,7 +25,7 @@ const ShareStore = ({ paramsId }: { paramsId: string }) => {
       <DialogTrigger asChild>
         <Button variant="outline" className="rounded-full">
           <Share className="w-4 h-4" />
-          Share
+          <p className="hidden md:flex">Share</p>
         </Button>
       </DialogTrigger>
 

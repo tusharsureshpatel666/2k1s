@@ -1,5 +1,15 @@
 import Image from "next/image";
-import { Heart, Share, Star, Trash } from "lucide-react";
+import {
+  ChartArea,
+  Circle,
+  Heart,
+  Megaphone,
+  MessageCircle,
+  Share,
+  Share2,
+  Star,
+  Trash,
+} from "lucide-react";
 
 import { getStoreById } from "@/lib/query/getstore";
 import { auth } from "@/lib/auth";
@@ -14,6 +24,7 @@ import OwnerButton from "./components/OwerButton";
 import Heading from "../../components/heading";
 import ReserveCard from "./components/priceCard";
 import PeopleDesc from "./components/peopleDesc";
+import { Button } from "@/components/ui/button";
 
 interface StorePageProps {
   params: {
@@ -54,7 +65,7 @@ export default async function StorePage({ params }: StorePageProps) {
   return (
     <div className="max-w-7xl w-full space-y-6  sm:px-6 lg:px-0">
       {/* ================= HEADER ================= */}
-      <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+      <div className="flex  gap-4 sm:flex-row sm:items-center justify-between">
         <h1 className="text-2xl font-semibold break-words">{store?.title}</h1>
 
         <div className="flex gap-4 items-center text-sm">
@@ -75,36 +86,47 @@ export default async function StorePage({ params }: StorePageProps) {
       </div>
 
       {/* ================= LOCATION ================= */}
-      <Heading
-        title={`Rental Store on ${store?.city}`}
-        description={`At ${store?.fullAddress}`}
-      />
+      <Heading title={`Rental Store on ${store?.city}`} className="mb-3" />
+      <div className="flex gap-2 items-center">
+        <h1 className="text-2xl">{`₹ ${store?.priceInr}`}</h1>
+        <span className="text-gray-500 text-sm">/ month</span>
+      </div>
 
       {/* ================= MAIN CONTENT ================= */}
-      <div className="grid grid-cols-1  gap-6 lg:grid-cols-3">
+      <div className="grid grid-cols-1  gap-6 ">
         {/* LEFT CONTENT */}
         <div className="lg:col-span-2 space-y-4">
-          <OwnerButton
-            image={OwerDetail.image || "/avatar.avif"}
-            name={OwerDetail.name || ""}
-            createAt={String(store?.createdAt)}
-          />
+          <div className="flex justify-between items-center">
+            <OwnerButton
+              image={OwerDetail.image || "/avatar.avif"}
+              name={OwerDetail.name || ""}
+              createAt={String(store?.createdAt)}
+            />
+            <div className="flex gap-2">
+              <Button className="py-4 px-4 rounded-md">
+                <MessageCircle />
+                Chat Partner
+              </Button>
+              <ReserveCard
+                price={store?.priceInr}
+                sharetype={store?.shareMode}
+                partnerBussiness={store?.businessType}
+                days={store?.days}
+                startTime={store?.startTime ?? ""}
+                endTime={store?.endTime ?? ""}
+                dayOrNight={store?.dayOrNight}
+              />
+              <Button variant={"destructive"}>
+                <Megaphone /> Report
+              </Button>
+            </div>
+          </div>
 
           <PeopleDesc peopleDesc={store?.desc} />
         </div>
 
         {/* RIGHT SIDEBAR */}
-        <div className="lg:sticky lg:top-24 w-full h-fit">
-          <ReserveCard
-            price={store?.priceInr}
-            sharetype={store?.shareMode}
-            partnerBussiness={store?.businessType}
-            days={store?.days}
-            startTime={store?.startTime ?? ""}
-            endTime={store?.endTime ?? ""}
-            dayOrNight={store?.dayOrNight}
-          />
-        </div>
+        <div className="lg:sticky lg:top-24 w-full h-fit"></div>
       </div>
     </div>
   );

@@ -37,7 +37,7 @@ export default function DeleteStoreButton({ storeId }: { storeId: string }) {
       <DialogTrigger asChild>
         <Button variant="destructive" className="items-center rounded-full">
           <Trash className="w-4 h-4 " />
-          Delete
+          <p className="hidden md:flex">Delete</p>
         </Button>
       </DialogTrigger>
 

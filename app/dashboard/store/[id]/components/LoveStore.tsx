@@ -49,14 +49,14 @@ export default function LoveStore({
       disabled={isPending}
       className={cn(
         "relative flex items-center gap-2 rounded-full px-4 transition",
-        liked && "border-red-500"
+        liked && "border-red-500",
       )}
     >
       {/* ❤️ Animated Heart */}
       <MotionHeart
         className={cn(
           "h-5 w-5 transition-colors",
-          liked ? "fill-red-500 text-red-500" : "text-gray-500"
+          liked ? "fill-red-500 text-red-500" : "text-gray-500",
         )}
         animate={{
           scale: liked ? [1, 1.35, 0.9, 1] : 1,
@@ -79,7 +79,9 @@ export default function LoveStore({
         </motion.span>
       )}
 
-      <span className="text-sm font-medium">{liked ? "Saved" : "Save"}</span>
+      <span className="text-sm font-medium md:flex hidden">
+        {liked ? "Saved" : "Save"}
+      </span>
     </Button>
   );
 }

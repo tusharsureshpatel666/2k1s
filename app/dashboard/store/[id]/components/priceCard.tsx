@@ -1,6 +1,14 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import { Birdhouse, HomeIcon } from "lucide-react";
 
 /* ----------------------------------
    Share type (same as Prisma enum)
@@ -19,7 +27,6 @@ interface ReserveCardProps {
   sharetype: ShareType;
   partnerBussiness?: string;
 
-  // Conditional fields
   startTime?: string;
   endTime?: string;
   days?: string[];
@@ -37,32 +44,32 @@ export default function ReserveCard(props: ReserveCardProps) {
     startTime,
     endTime,
     days,
-
     dayOrNight,
   } = props;
 
   /* ----------------------------------
-     Render details based on share type
+     Render share details (Dialog)
   ----------------------------------- */
-  const renderShareDetails = () => {
+  const renderDialogDetails = () => {
     switch (sharetype) {
       case "HOURS_BY_HOURS":
         return (
-          <p className="mt-2 text-sm text-muted-foreground">
-            Time: <span className="font-medium">{startTime}</span> –{" "}
-            <span className="font-medium">{endTime}</span>
-          </p>
+          <div className="space-y-2 text-sm">
+            <p>
+              <span className="font-medium">Time:</span> {startTime} – {endTime}
+            </p>
+          </div>
         );
 
       case "DAYS_BY_DAYS":
         return (
-          <div className="mt-2">
-            <p className="text-sm text-muted-foreground mb-1">Available Days</p>
+          <div className="space-y-2">
+            <p className="font-medium text-sm">Available Days</p>
             <div className="flex flex-wrap gap-2">
-              {days.map((day) => (
+              {days?.map((day) => (
                 <span
                   key={day}
-                  className="rounded-full border px-3 py-1 text-xs font-medium"
+                  className="rounded-full border px-3 py-1 text-xs"
                 >
                   {day}
                 </span>
@@ -73,16 +80,16 @@ export default function ReserveCard(props: ReserveCardProps) {
 
       case "DAY_OR_NIGHT":
         return (
-          <p className="mt-2 text-sm text-muted-foreground">
-            Slot: <span className="font-medium">{dayOrNight}</span>
+          <p className="text-sm">
+            <span className="font-medium">Slot:</span> {dayOrNight}
           </p>
         );
 
       case "SPLIT_STORE":
         return (
-          <p className="mt-2 text-sm text-muted-foreground">
-            Partner Business:{" "}
-            <span className="font-medium">{partnerBussiness}</span>
+          <p className="text-sm">
+            <span className="font-medium">Partner Business:</span>{" "}
+            {partnerBussiness}
           </p>
         );
 
@@ -95,34 +102,29 @@ export default function ReserveCard(props: ReserveCardProps) {
      JSX
   ----------------------------------- */
   return (
-    <div className="w-full  rounded-2xl p-8 shadow-lg border">
+    <div className="">
       {/* Price */}
-      <div className="mb-2 text-lg font-semibold">
-        ₹ {price} <span className="text-sm font-normal">/ month</span>
-      </div>
 
-      {/* Share Type */}
-      <div className="text-sm font-medium text-gray-700">
-        {sharetype.replaceAll("_", " ")}
-        {partnerBussiness && ` | ${partnerBussiness}`}
-      </div>
+      {/* Share Type Button */}
+      <Dialog>
+        <DialogTrigger asChild>
+          <Button variant={"outline"} className="text-sm font-medium ">
+            <Birdhouse /> {sharetype.replaceAll("_", " ")}
+          </Button>
+        </DialogTrigger>
 
-      {/* Conditional Details */}
-      {renderShareDetails()}
+        <DialogContent className="sm:max-w-md">
+          <DialogHeader>
+            <DialogTitle>Sharing Details</DialogTitle>
+          </DialogHeader>
+
+          <div className="mt-4 space-y-4">{renderDialogDetails()}</div>
+        </DialogContent>
+      </Dialog>
 
       {/* Reserve Button */}
-      <Button className="mt-6 w-full rounded-full py-6 text-base font-semibold bg-blue-500 hover:bg-blue-600">
-        Chat with Partner
-      </Button>
 
       {/* Footer */}
-      <p className="mt-2 text-center text-sm text-muted-foreground">
-        You won&apos;t be charged yet
-      </p>
-
-      <button className="mt-4 w-full text-center text-sm underline text-muted-foreground">
-        Report this listing
-      </button>
     </div>
   );
 }
