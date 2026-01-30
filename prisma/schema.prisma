@@ -121,22 +121,26 @@ model StoreLike {
 }
 
 
-model Conversation{
-  id String @id @default(uuid())
-  storeId String
-  store Store @relation(fields: [storeId], references: [id])
+model Conversation {
+  id        String @id @default(uuid())
 
-  ownerId String
-  owner User @relation("OwnerConversation", fields: [ownerId], references: [id])
+  storeId   String
+  store     Store  @relation(fields: [storeId], references: [id])
 
-  userId String
-  user User @relation("UserConversation", fields: [userId], references: [id])
-  messages Messages[]
+  ownerId   String
+  owner     User   @relation("OwnerConversation", fields: [ownerId], references: [id])
+
+  userId    String
+  user      User   @relation("UserConversation", fields: [userId], references: [id])
+
+  messages  Messages[]
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
   @@unique([storeId, ownerId, userId])
 }
+
 
 model Messages{
   id String @id @default(uuid())

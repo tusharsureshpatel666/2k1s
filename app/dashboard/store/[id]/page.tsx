@@ -117,9 +117,17 @@ export default async function StorePage({ params }: StorePageProps) {
   "
             >
               {/* Chat */}
-              <Link href={"/dashboard/message"}>
-                <Button className="flex-1  rounded-md">
-                  <MessageCircle className=" h-4 w-4" />
+              <Link
+                href={{
+                  pathname: "/dashboard/message",
+                  query: {
+                    storeId: storeId.id,
+                    ownerId: store?.ownerId,
+                  },
+                }}
+              >
+                <Button className="flex-1 rounded-md">
+                  <MessageCircle className="h-4 w-4 mr-2" />
                   Chat Partner
                 </Button>
               </Link>
@@ -142,9 +150,6 @@ export default async function StorePage({ params }: StorePageProps) {
 
           <PeopleDesc peopleDesc={store?.desc} />
         </div>
-
-        {/* RIGHT SIDEBAR */}
-        <div className="lg:sticky lg:top-24 w-full h-fit"></div>
       </div>
     </div>
   );
