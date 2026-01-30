@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import clsx from "clsx";
 
 type Props = {
@@ -14,22 +14,29 @@ const PeopleDesc = ({ peopleDesc, maxLines = 3 }: Props) => {
   if (!peopleDesc) return null;
 
   return (
-    <div className="mt-3 w-full rounded-xl bg-muted/70 mr-2 h-32 p-4 text-sm">
-      <p
+    <div className="mt-4 w-full rounded-xl bg-muted/70 p-4 text-sm">
+      {/* Description */}
+      <div
         className={clsx(
-          "whitespace-pre-line leading-relaxed transition-all",
+          "relative overflow-hidden whitespace-pre-line leading-relaxed transition-all duration-300",
           !expanded && `line-clamp-${maxLines}`,
         )}
       >
         {`Finding For ${peopleDesc}`}
-      </p>
 
-      {peopleDesc.length > 150 && (
+        {/* Gradient fade like YouTube */}
+        {!expanded && (
+          <div className="pointer-events-none absolute bottom-0 left-0 h-12 w-full  from-muted/90 to-transparent" />
+        )}
+      </div>
+
+      {/* Toggle */}
+      {peopleDesc.length > 120 && (
         <button
           onClick={() => setExpanded(!expanded)}
-          className="mt-2 text-xs font-medium uppercase text-gray-600 hover:text-black"
+          className="mt-2 text-sm font-medium text-blue-600 hover:underline"
         >
-          {expanded ? "Show less" : "Show more"}
+          {expanded ? "Show less" : "Read more"}
         </button>
       )}
     </div>

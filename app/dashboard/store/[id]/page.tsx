@@ -63,7 +63,7 @@ export default async function StorePage({ params }: StorePageProps) {
   ].filter(Boolean);
 
   return (
-    <div className="max-w-7xl w-full space-y-6  sm:px-6 lg:px-0">
+    <div className="max-w-7xl w-full space-y-6 mb-[50px] md:mt-2  sm:px-6 lg:px-0">
       {/* ================= HEADER ================= */}
       <div className="flex  gap-4 sm:flex-row sm:items-center justify-between">
         <h1 className="text-2xl font-semibold break-words">{store?.title}</h1>
@@ -96,17 +96,30 @@ export default async function StorePage({ params }: StorePageProps) {
       <div className="grid grid-cols-1  gap-6 ">
         {/* LEFT CONTENT */}
         <div className="lg:col-span-2 space-y-4">
-          <div className="flex justify-between items-center">
+          <div className="flex  md:flex-row justify-between md:items-center">
             <OwnerButton
               image={OwerDetail.image || "/avatar.avif"}
               name={OwerDetail.name || ""}
               createAt={String(store?.createdAt)}
             />
-            <div className="flex gap-2">
-              <Button className="py-4 px-4 rounded-md">
-                <MessageCircle />
+            {/* Spacer for mobile footer height */}
+
+            {/* Bottom Footer */}
+            <div
+              className="
+    fixed bottom-0 left-0 right-0 z-50
+    border-t bg-background px-4 py-3
+    flex gap-2
+    sm:static sm:border-0 sm:p-0
+  "
+            >
+              {/* Chat */}
+              <Button className="flex-1  rounded-md">
+                <MessageCircle className=" h-4 w-4" />
                 Chat Partner
               </Button>
+
+              {/* Share / Reserve */}
               <ReserveCard
                 price={store?.priceInr}
                 sharetype={store?.shareMode}
@@ -116,8 +129,10 @@ export default async function StorePage({ params }: StorePageProps) {
                 endTime={store?.endTime ?? ""}
                 dayOrNight={store?.dayOrNight}
               />
-              <Button variant={"destructive"}>
-                <Megaphone /> Report
+
+              {/* Report */}
+              <Button variant="destructive" className="px-4 rounded-md">
+                <Megaphone className="h-4 w-4" />
               </Button>
             </div>
           </div>

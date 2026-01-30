@@ -4,14 +4,35 @@ import clsx from "clsx";
 interface HeadingProps {
   title: string;
   description?: string;
-  className?: string; // ✅ allow extra classes
+  className?: string;
 }
 
 const Heading: React.FC<HeadingProps> = ({ title, description, className }) => {
   return (
-    <div className={clsx("flex flex-col gap-2", className)}>
-      <h1 className="text-2xl font-semibold">{title}</h1>
-      {description && <p className="text-gray-500 text-base">{description}</p>}
+    <div className={clsx("flex flex-col gap-1 sm:gap-2 md:gap-3", className)}>
+      <h1
+        className="
+          text-lg font-semibold leading-tight
+          sm:text-xl
+          md:text-2xl
+          lg:text-3xl
+        "
+      >
+        {title}
+      </h1>
+
+      {description && (
+        <p
+          className="
+            text-sm text-gray-500 leading-relaxed
+            sm:text-base
+            md:text-lg
+            max-w-prose
+          "
+        >
+          {description}
+        </p>
+      )}
     </div>
   );
 };
