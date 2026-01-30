@@ -150,8 +150,8 @@ body {
 
 /* Chrome, Edge, Safari */
 *::-webkit-scrollbar {
-  width: 2px;
-  height: 2px;
+  width: 0px;
+  height: 0px;
 }
 
 *::-webkit-scrollbar-track {
@@ -161,7 +161,7 @@ body {
 *::-webkit-scrollbar-thumb {
   background-color: #cbd5e1; /* slate-300 */
   border-radius: 999px;
-  border: 2px solid transparent;
+  border: 0px solid transparent;
   background-clip: content-box;
 }
 

@@ -25,6 +25,8 @@ import Heading from "../../components/heading";
 import ReserveCard from "./components/priceCard";
 import PeopleDesc from "./components/peopleDesc";
 import { Button } from "@/components/ui/button";
+import ReportDialog from "../../components/report";
+import Link from "next/link";
 
 interface StorePageProps {
   params: {
@@ -114,10 +116,12 @@ export default async function StorePage({ params }: StorePageProps) {
   "
             >
               {/* Chat */}
-              <Button className="flex-1  rounded-md">
-                <MessageCircle className=" h-4 w-4" />
-                Chat Partner
-              </Button>
+              <Link href={"/dashboard/message"}>
+                <Button className="flex-1  rounded-md">
+                  <MessageCircle className=" h-4 w-4" />
+                  Chat Partner
+                </Button>
+              </Link>
 
               {/* Share / Reserve */}
               <ReserveCard
@@ -131,9 +135,7 @@ export default async function StorePage({ params }: StorePageProps) {
               />
 
               {/* Report */}
-              <Button variant="destructive" className="px-4 rounded-md">
-                <Megaphone className="h-4 w-4" />
-              </Button>
+              <ReportDialog />
             </div>
           </div>
 

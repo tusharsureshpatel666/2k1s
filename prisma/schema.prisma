@@ -39,6 +39,13 @@ model User {
   stores             Store[]      @relation("OwerStores")
   likedStores        StoreLike[]
 
+  ownerChats Conversation[] @relation("OwnerConversation")
+  userChats Conversation[] @relation("UserConversation")
+  messages Messages[]
+  notification Notification[]
+
+ 
+
 
 }
 
@@ -69,6 +76,9 @@ model Store {
 
   bannerImageUrl  String?
   images           StoreImage[]
+    conversations Conversation[]
+
+
 
   // videoUrl        String
 
@@ -108,4 +118,46 @@ model StoreLike {
   createdAt DateTime @default(now())
 
   @@unique([userId, storeId]) // prevent double-like
+}
+
+
+model Conversation{
+  id String @id @default(uuid())
+  storeId String
+  store Store @relation(fields: [storeId], references: [id])
+
+  ownerId String
+  owner User @relation("OwnerConversation", fields: [ownerId], references: [id])
+
+  userId String
+  user User @relation("UserConversation", fields: [userId], references: [id])
+  messages Messages[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([storeId, ownerId, userId])
+}
+
+model Messages{
+  id String @id @default(uuid())
+
+  conversationId String
+  conversation Conversation @relation(fields: [conversationId], references: [id])
+
+  senderId String
+  sender User @relation(fields: [senderId], references: [id])
+
+  text String
+  seen Boolean @default(false)
+  createdAt DateTime @default(now())
+}
+
+model Notification{
+  id String @id @default(uuid())
+  userId String
+  user User @relation(fields: [userId], references: [id])
+  type String
+  message String
+  isRead Boolean @default(false)
+  createdAt DateTime @default(now())
 }
