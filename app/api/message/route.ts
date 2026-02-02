@@ -2,19 +2,23 @@ import prisma from "@/lib/prisma";
 import { auth } from "@/lib/auth";
 import { NextResponse } from "next/server";
 
-export async function POST(req: Request) {
+export async function GET(req: Request) {
   const session = await auth();
   if (!session?.user?.id) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
-  const { conversationId, text } = await req.json();
+  const { searchParams } = new URL(req.url);
+  const conversationId = searchParams.get("conversationId");
 
-  if (!conversationId || !text) {
-    return NextResponse.json({ error: "Invalid payload" }, { status: 400 });
+  if (!conversationId) {
+    return NextResponse.json(
+      { error: "Missing conversationId" },
+      { status: 400 },
+    );
   }
 
-  // Security check
+  // Security: user must belong to conversation
   const conversation = await prisma.conversation.findFirst({
     where: {
       id: conversationId,
@@ -26,13 +30,10 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: "Forbidden" }, { status: 403 });
   }
 
-  const message = await prisma.message.create({
-    data: {
-      conversationId,
-      senderId: session.user.id,
-      text,
-    },
+  const messages = await prisma.message.findMany({
+    where: { conversationId },
+    orderBy: { createdAt: "asc" },
   });
 
-  return NextResponse.json(message);
+  return NextResponse.json(messages);
 }

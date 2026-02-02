@@ -1,36 +1,40 @@
 import { auth } from "@/lib/auth";
 import prisma from "@/lib/prisma";
-import { error } from "console";
 import { NextResponse } from "next/server";
 
 export async function POST(req: Request) {
   const session = await auth();
+
   if (!session?.user?.id) {
-    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    return NextResponse.json({ error: "Unauthication" }, { status: 400 });
   }
 
-  const { storeId, ownerId } = await req.json();
-  const userId = session.user.id;
+  const { storeId } = await req.json();
 
-  if (userId === ownerId) {
-    return NextResponse.json({ error: "Invalid Chat" }, { status: 401 });
-  }
-  let conversation = await prisma.conversation.findFirst({
+  const store = await prisma.store.findUnique({
     where: {
-      storeId,
-      ownerId,
-      userId,
+      id: storeId,
     },
   });
-
-  if (!conversation) {
-    conversation = await prisma.conversation.create({
-      data: {
-        storeId,
-        ownerId,
-        userId,
-      },
-    });
+  if (!store) {
+    return NextResponse.json({ error: "No store found" }, { status: 400 });
   }
+
+  const conversation = await prisma.conversation.upsert({
+    where: {
+      storeId_ownerId_userId: {
+        storeId,
+        ownerId: store.ownerId,
+        userId: session.user.id,
+      },
+    },
+    update: {},
+
+    create: {
+      storeId,
+      ownerId: store.ownerId,
+      userId: session.user.id,
+    },
+  });
   return NextResponse.json(conversation);
 }

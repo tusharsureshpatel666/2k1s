@@ -25,33 +25,94 @@ enum ShareMode {
 
 
 model User {
-  id                 String   @id @default(uuid())
-  name               String?
-  email              String?  @unique
-  image              String?
+  id            String   @id @default(uuid())
+  name          String?
+  email         String?  @unique
+  image         String?
 
-  phone              String?
-  phoneVerified      Boolean  @default(false)
+  phone         String?
+  phoneVerified Boolean  @default(false)
 
+  createdAt     DateTime @default(now())
 
-  createdAt          DateTime @default(now())
+  // Stores
+  stores        Store[]      @relation("OwerStores")
+  likedStores   StoreLike[]
 
-  stores             Store[]      @relation("OwerStores")
-  likedStores        StoreLike[]
-
-  ownerChats Conversation[] @relation("OwnerConversation")
-  userChats Conversation[] @relation("UserConversation")
-  messages Messages[]
-  notification Notification[]
-
- 
-
-
+  // Chat
+  conversations ConversationParticipant[]
+  messages      Message[]
+  seenMessages  MessageSeen[]
 }
 
+// ==========================
+// CONVERSATION
+// ==========================
+model Conversation {
+  id            String   @id @default(uuid())
+  name          String?
+  createdAt     DateTime @default(now())
+  lastMessageAt DateTime @default(now())
 
+  participants  ConversationParticipant[]
+  messages      Message[]
+}
 
+// ==========================
+// CONVERSATION ↔ USER (JOIN TABLE)
+// ==========================
+model ConversationParticipant {
+  id             String @id @default(uuid())
+  userId         String
+  conversationId String
 
+  user           User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  conversation   Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, conversationId])
+  @@index([conversationId])
+}
+
+// ==========================
+// MESSAGE
+// ==========================
+model Message {
+  id             String   @id @default(uuid())
+  body           String?
+  image          String?
+  createdAt      DateTime @default(now())
+
+  conversationId String
+  conversation   Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+
+  senderId       String
+  sender         User @relation(fields: [senderId], references: [id], onDelete: Cascade)
+
+  seenBy         MessageSeen[]
+
+  @@index([conversationId])
+  @@index([senderId])
+}
+
+// ==========================
+// MESSAGE SEEN (JOIN TABLE)
+// ==========================
+model MessageSeen {
+  id        String   @id @default(uuid())
+  messageId String
+  userId    String
+  seenAt    DateTime @default(now())
+
+  message   Message @relation(fields: [messageId], references: [id], onDelete: Cascade)
+  user      User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([messageId, userId])
+  @@index([userId])
+}
+
+// ==========================
+// STORE
+// ==========================
 model Store {
   id              String      @id @default(uuid())
 
@@ -75,93 +136,50 @@ model Store {
   longitude       Float?
 
   bannerImageUrl  String?
-  images           StoreImage[]
-  conversations Conversation[]
-
-
-
-  // videoUrl        String
+  images          StoreImage[]
 
   priceInr        Int
 
   shareMode       ShareMode
-  startTime     String?
-  endTime       String?
-  days          String[]
-  sqft          Int?
-  dayOrNight    String?
-  likes           StoreLike[] 
+  startTime       String?
+  endTime         String?
+  days            String[]
+  sqft            Int?
+  dayOrNight      String?
+
+  likes           StoreLike[]
 
   createdAt       DateTime    @default(now())
   updatedAt       DateTime    @updatedAt
 }
 
-
-
-
+// ==========================
+// STORE IMAGE
+// ==========================
 model StoreImage {
   id        String   @id @default(cuid())
-  store     Store    @relation(fields: [storeId], references: [id])
   storeId   String
+  store     Store    @relation(fields: [storeId], references: [id], onDelete: Cascade)
   url       String
-  order     Int      @default(0) // order index (0..4)
+  order     Int      @default(0)
   createdAt DateTime @default(now())
-  
+
+  @@index([storeId])
 }
 
+// ==========================
+// STORE LIKE
+// ==========================
 model StoreLike {
   id        String   @id @default(uuid())
   userId    String
   storeId   String
-    user      User     @relation(fields: [userId], references: [id])
-    store     Store    @relation(fields: [storeId], references: [id])
-  createdAt DateTime @default(now())
 
-  @@unique([userId, storeId]) // prevent double-like
-}
-
-
-model Conversation {
-  id        String @id @default(uuid())
-
-  storeId   String
-  store     Store  @relation(fields: [storeId], references: [id])
-
-  ownerId   String
-  owner     User   @relation("OwnerConversation", fields: [ownerId], references: [id])
-
-  userId    String
-  user      User   @relation("UserConversation", fields: [userId], references: [id])
-
-  messages  Messages[]
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  store     Store    @relation(fields: [storeId], references: [id], onDelete: Cascade)
 
   createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
 
-  @@unique([storeId, ownerId, userId])
-}
-
-
-model Messages{
-  id String @id @default(uuid())
-
-  conversationId String
-  conversation Conversation @relation(fields: [conversationId], references: [id])
-
-  senderId String
-  sender User @relation(fields: [senderId], references: [id])
-
-  text String
-  seen Boolean @default(false)
-  createdAt DateTime @default(now())
-}
-
-model Notification{
-  id String @id @default(uuid())
-  userId String
-  user User @relation(fields: [userId], references: [id])
-  type String
-  message String
-  isRead Boolean @default(false)
-  createdAt DateTime @default(now())
+  @@unique([userId, storeId])
+  @@index([storeId])
 }

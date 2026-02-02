@@ -110,7 +110,7 @@ export default async function StorePage({ params }: StorePageProps) {
             <div
               className="
               flex justify-center items-center
-    fixed bottom-0 left-0 right-0 z-50
+    fixed bottom-0 left-0 right-0 
     border-t bg-background px-2 py-3
      gap-2
     sm:static sm:border-0 sm:p-0
@@ -119,11 +119,7 @@ export default async function StorePage({ params }: StorePageProps) {
               {/* Chat */}
               <Link
                 href={{
-                  pathname: "/dashboard/message",
-                  query: {
-                    storeId: storeId.id,
-                    ownerId: store?.ownerId,
-                  },
+                  pathname: `/dashboard/message/${store?.id}`,
                 }}
               >
                 <Button className="flex-1 rounded-md">
