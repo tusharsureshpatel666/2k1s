@@ -4,9 +4,9 @@ import AddFormStore from "./components/AddFormStore";
 
 const page = () => {
   return (
-    <div className="w-full">
+    <>
       <AddFormStore />
-    </div>
+    </>
   );
 };
 

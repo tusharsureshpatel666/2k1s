@@ -219,7 +219,7 @@ const AddFormStore = () => {
   };
 
   return (
-    <div className="flex flex-col w-full max-w-6xl mx-auto gap-6 mt-4 pb-28">
+    <div className="flex flex-col h-[80vh] w-full justify-center items-center max-w-6xl mx-auto gap-6 mt-4 ">
       {/* STEP 0 */}
       {sStep === 0 && <StepIntro />}
 
