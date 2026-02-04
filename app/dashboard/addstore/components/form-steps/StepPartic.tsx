@@ -11,7 +11,7 @@ const StepPartic = () => {
   const { mode } = share;
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 w-full">
       <Heading
         title="Select Your Store Sharing Method"
         description="Decide how you want to share your store and make it accessible to your audience."

@@ -13,11 +13,11 @@ const StepIntro = () => {
       <div className="flex justify-center w-full flex-col text-center items-center gap-5">
         <div className="relative mx-auto w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg aspect-square">
           <Image
-            src="/starter.svg"
+            src="/main.jpg"
             alt="Illustration"
             fill
             priority
-            className="object-contain"
+            className="object-cover rounded-full"
           />
         </div>
 

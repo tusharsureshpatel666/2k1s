@@ -70,7 +70,7 @@ const LocationPicker = ({
         try {
           // Use OpenStreetMap Nominatim API for reverse geocoding
           const response = await fetch(
-            `https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${latitude}&lon=${longitude}`
+            `https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${latitude}&lon=${longitude}`,
           );
           const data = await response.json();
 
@@ -97,12 +97,12 @@ const LocationPicker = ({
         console.error(err);
         alert("Unable to get your location");
         setLoadingLocation(false);
-      }
+      },
     );
   };
 
   return (
-    <div className="space-y-6 rounded-xl lg:p-6">
+    <div className="space-y-6 rounded-xl w-full lg:p-6">
       <Heading
         title="Store Location"
         description="Select your store location (Delhi only)"

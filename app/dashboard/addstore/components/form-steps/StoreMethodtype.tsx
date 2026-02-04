@@ -20,14 +20,14 @@ const StoreMethodtype = () => {
 
   console.log("mode", mode);
   return (
-    <div>
+    <div className="w-full">
       {mode === "HOURS_BY_HOURS" && (
         <>
           <Heading
             title="Share By Hours"
             description="How much time you wanna share your store"
           />
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full">
             <div className="space-y-1">
               <label className="text-sm font-medium">Start Time</label>
               <input

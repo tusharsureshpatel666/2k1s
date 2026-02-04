@@ -35,7 +35,7 @@ const StepTypeStore = ({ value, onChange }: Props) => {
   ];
 
   return (
-    <div className="flex flex-col space-y-5 ">
+    <div className="flex flex-col w-full space-y-5 ">
       <Heading
         title="Choose Your Store Size"
         description="Select the option that best matches your store space."

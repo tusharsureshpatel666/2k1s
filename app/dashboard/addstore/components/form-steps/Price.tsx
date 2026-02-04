@@ -5,7 +5,7 @@ import React from "react";
 const Price = () => {
   const { maxprice, maxsetPrice, minprice, minsetPrice } = useSearchStoreData();
   return (
-    <div className="flex flex-col items-center space-y-8 py-10">
+    <div className="flex w-full flex-col items-center space-y-8 py-10">
       <Heading
         title="Tell your Price"
         description="Tell us your price to want to pay for the sharing we found for you"

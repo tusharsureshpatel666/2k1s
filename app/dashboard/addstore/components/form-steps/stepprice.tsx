@@ -9,7 +9,7 @@ interface PriceInputProps {
 
 const PriceInput = ({ price, setPrice }: PriceInputProps) => {
   return (
-    <div className="flex flex-col items-center space-y-8 py-10">
+    <div className="flex flex-col w-full items-center space-y-8 py-10">
       <Heading
         title="Set Your Store Share Price"
         description="This is the amount users will pay to share your store."
