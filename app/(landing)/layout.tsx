@@ -3,6 +3,7 @@
 import React from "react";
 import Navbar from "../components/navbar";
 import Link from "next/link";
+import Footer from "./components/footer";
 
 interface MainLayoutProps {
   children: React.ReactNode;
@@ -20,40 +21,7 @@ export default function MainLayout({ children }: MainLayoutProps) {
       </main>
 
       {/* Footer */}
-      <footer className="w-full border-t dark:border-gray-800 py-6 mt-10">
-        <div
-          className="
-            max-w-6xl mx-auto px-4
-            flex flex-col gap-4
-            sm:flex-row sm:justify-between sm:items-center
-            text-sm text-gray-500 dark:text-gray-400
-            text-center sm:text-left
-          "
-        >
-          <p>© 2026 2k1s — All Rights Reserved</p>
-
-          <div className="flex justify-center sm:justify-end gap-4 flex-wrap">
-            <Link
-              href="/common/privacy"
-              className="hover:text-black dark:hover:text-white"
-            >
-              Privacy Policy
-            </Link>
-            <Link
-              href="/common/terms"
-              className="hover:text-black dark:hover:text-white"
-            >
-              Terms
-            </Link>
-            <Link
-              href="/common/contact"
-              className="hover:text-black dark:hover:text-white"
-            >
-              Contact
-            </Link>
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 }
